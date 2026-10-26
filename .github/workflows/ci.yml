@@ -14,8 +14,11 @@ jobs:
         with:
           python-version: '3.13'
       - run: python -m unittest discover -s app -v
-      - run: pip install semgrep==1.140.0
-      - run: semgrep scan --config p/python --config p/secrets --error app Dockerfile
+      - name: Blocking SAST and secret scan
+        run: >-
+          docker run --rm -v "$PWD:/src"
+          semgrep/semgrep:1.140.0@sha256:4372a1de903521f9f10f877b6caf15d150d17e1ca592582682c8d02b77cbd4f6
+          semgrep scan --config p/python --config p/secrets --error app Dockerfile
       - uses: azure/setup-helm@v4.3.1
       - run: helm lint charts/quote-api && helm template quote-api charts/quote-api > /tmp/rendered.yaml
       - run: bash -n scripts/*.sh

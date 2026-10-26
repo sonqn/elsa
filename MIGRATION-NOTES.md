@@ -3,7 +3,7 @@
 The migrated scope is test, SAST gate and image publication. GitOps owns deployment; the CI job no longer stores kubeconfig or mutates live Deployments with `kubectl set image`.
 
 - Tests run on PRs and main and propagate failure; removed `npm test || echo ...`. The app is Python, so the inherited Node 16/npm steps were replaced, not copied.
-- Semgrep scans Python/security and secret rules with `--error`. Findings or scan errors fail the quality job. Publish depends on quality; removed Sonar's `allow_failure: true` and main-only checks.
+- Digest-pinned Semgrep container avoids the pip MCP/Pydantic dependency incompatibility reproduced during validation. Semgrep scans Python/security and secret rules with `--error`. Findings or scan errors fail the quality job. Publish depends on quality; removed Sonar's `allow_failure: true` and main-only checks.
 - Publish runs only on main pushes, with job-scoped `packages: write` and ephemeral `GITHUB_TOKEN`; fork PRs cannot push packages. No password on the CLI, privileged Docker-in-Docker service, stored cloud credentials or broad global write permissions.
 - GHCR tags are full git SHAs; buildx publishes amd64 and arm64. OCI source labels connect the package to this repository. The package must be public for anonymous reviewers; a public GitHub repo does not itself guarantee package visibility.
 - Source chart, probes and placement are reviewed in Git. Release automation should promote a verified SHA by PR into environment values, followed by Argo CD reconciliation. This take-home pins each local run to its repository HEAD.

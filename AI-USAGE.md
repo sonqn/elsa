@@ -13,3 +13,5 @@ Correction example: the initial AI design proposed one on-demand Deployment plus
 Another practical correction: the initial Docker build tried writing Buildx state outside the sandbox and failed. Buildx state was redirected into the authorized work directory rather than claiming a successful build. Runtime evidence and outstanding external checks are kept in `evidence/VALIDATION.md`.
 
 Validation includes API behavior/CPU-work tests, Helm rendering, actual local cluster deployment and the supplied verifier where recorded. No successful GitHub run, GHCR publication or production behavior is inferred from local linting.
+
+CI correction: the first workflow installed Semgrep 1.140.0 through pip. Reproducing that in a fresh Python 3.13 container exposed a transitive MCP/Pydantic ImportError (`eval_type_backport`). The workflow now uses the tested Semgrep container pinned by digest, preserving `--error` instead of weakening the gate.

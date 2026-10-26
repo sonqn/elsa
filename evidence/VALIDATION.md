@@ -14,7 +14,7 @@ Environment: Apple Silicon, Docker 29.6.1, 12 CPUs / 8 GiB Docker RAM; k3s v1.33
 | Troubleshooting | Original broken manifests applied, diagnostic snapshots collected, fixed manifests applied; unchanged verifier PASS, repeated successfully. |
 | Denied traffic | An unlabeled-for-allow client in troubleshoot could not reach web Service by IP (curl exit 7; k3s can reject rather than time out). Allowed smoke-client passes. Initial negative-test assertion expected only timeout 28 and was too narrow; no claim that this failed assertion itself passed. |
 | SAST local | Semgrep 1.140.0: 187 rules, 3 targets, zero findings. Separate deliberate shell=True fixture produces one blocking finding. |
-| GitHub CI | Initial public run failed at Semgrep; publication skipped as designed. Root cause pending access to full job logs. |
+| GitHub CI | Initial public run failed at Semgrep; publication skipped as designed. Fresh Python 3.13 pip reproduction fails with MCP/Pydantic ImportError; workflow changed to the tested digest-pinned Semgrep image. Final rerun pending. |
 | Public GHCR | Not yet verified or published; local image was built and imported, not downloaded from GHCR. |
 
 The remote chart tree used by the observed deployment matches the local chart template. The image was locally built as `ghcr.io/sonqn/elsa:6a1e4384ded2d5d34713f9344dcc620447740ce9`. That commit was not yet pushed because Keychain rejected the subsequent Git authentication. This is explicitly not evidence of the final clean-clone Golden Rule or a successful remote CI run. Both need rerunning once authentication is available.
