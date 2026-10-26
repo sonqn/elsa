@@ -1,7 +1,9 @@
 # ELSA DevOps challenge
 
+[![Verify and publish](https://github.com/sonqn/elsa/actions/workflows/ci.yml/badge.svg)](https://github.com/sonqn/elsa/actions/workflows/ci.yml)
+
 Implemented scope: CORE (1–3), CI migration (4), and operations answers (7).
-Local runtime evidence and external publication status are in [evidence/VALIDATION.md](evidence/VALIDATION.md).
+Clean-clone run, reclaim drill and troubleshooting passed; GitHub Actions published public amd64/arm64 images. Exact runtime evidence and publication status are in [evidence/VALIDATION.md](evidence/VALIDATION.md).
 
 ```mermaid
 flowchart LR

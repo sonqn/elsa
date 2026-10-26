@@ -6,7 +6,7 @@ Actual user prompts in this session:
 1. “Hãy giúp tôi thực hiện challenge ở file đính kèm” (help me implement the attached challenge).
 2. Repository destination supplied in response to the publication question: `https://github.com/sonqn/elsa`.
 
-Only these two user inputs were received; a third prompt is not fabricated. The assistant's concrete verification questions were: does capacity-level spread retain an on-demand replica during a spot drain, and does the unchanged troubleshooting verifier pass with default-deny preserved?
+These are the two substantive task/destination inputs; additional design prompts are not fabricated. The assistant's concrete verification questions were: does capacity-level spread retain an on-demand replica during a spot drain, and does the unchanged troubleshooting verifier pass with default-deny preserved?
 
 Correction example: the initial AI design proposed one on-demand Deployment plus an autoscaled spot-preferred Deployment. Review against the requirement exposed a mismatch: HPA minReplicas 3 plus one fixed replica produces at least four total. Before deployment this was replaced by one Deployment with hard capacity-type spread and soft hostname spread, keeping HPA minimum 3. A hard hostname spread would have unnecessarily constrained replacement scheduling when a worker disappears.
 

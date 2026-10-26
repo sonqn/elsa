@@ -1,9 +1,9 @@
 LAST SEEN   TYPE      REASON              OBJECT                               MESSAGE
-10s         Warning   FailedScheduling    pod/ai-inference-7d84bb9f5c-x6s9k    0/5 nodes are available: 1 node(s) had untolerated taint {nvidia.com/gpu: true}, 4 node(s) didn't match Pod's node affinity/selector. preemption: 0/5 nodes are available: 5 Preemption is not helpful for scheduling.
-10s         Warning   FailedScheduling    pod/web-84d8fb5b57-5w9cl             0/5 nodes are available: 1 node(s) had untolerated taint {nvidia.com/gpu: true}, 4 Insufficient memory. preemption: 0/5 nodes are available: 1 Preemption is not helpful for scheduling, 4 No preemption victims found for incoming pod.
-10s         Warning   FailedScheduling    pod/web-84d8fb5b57-xnmq7             0/5 nodes are available: 1 node(s) had untolerated taint {nvidia.com/gpu: true}, 4 Insufficient memory. preemption: 0/5 nodes are available: 1 Preemption is not helpful for scheduling, 4 No preemption victims found for incoming pod.
-11s         Normal    SuccessfulCreate    replicaset/ai-inference-7d84bb9f5c   Created pod: ai-inference-7d84bb9f5c-x6s9k
+10s         Warning   FailedScheduling    pod/ai-inference-7d84bb9f5c-h66hb    0/5 nodes are available: 1 node(s) had untolerated taint {nvidia.com/gpu: true}, 4 node(s) didn't match Pod's node affinity/selector. preemption: 0/5 nodes are available: 5 Preemption is not helpful for scheduling.
+10s         Warning   FailedScheduling    pod/web-84d8fb5b57-88f2n             0/5 nodes are available: 1 node(s) had untolerated taint {nvidia.com/gpu: true}, 4 Insufficient memory. preemption: 0/5 nodes are available: 1 Preemption is not helpful for scheduling, 4 No preemption victims found for incoming pod.
+10s         Warning   FailedScheduling    pod/web-84d8fb5b57-sbhjq             0/5 nodes are available: 1 node(s) had untolerated taint {nvidia.com/gpu: true}, 4 Insufficient memory. preemption: 0/5 nodes are available: 1 Preemption is not helpful for scheduling, 4 No preemption victims found for incoming pod.
+11s         Normal    SuccessfulCreate    replicaset/ai-inference-7d84bb9f5c   Created pod: ai-inference-7d84bb9f5c-h66hb
 11s         Normal    ScalingReplicaSet   deployment/ai-inference              Scaled up replica set ai-inference-7d84bb9f5c from 0 to 1
-11s         Normal    SuccessfulCreate    replicaset/web-84d8fb5b57            Created pod: web-84d8fb5b57-5w9cl
-11s         Normal    SuccessfulCreate    replicaset/web-84d8fb5b57            Created pod: web-84d8fb5b57-xnmq7
+11s         Normal    SuccessfulCreate    replicaset/web-84d8fb5b57            Created pod: web-84d8fb5b57-sbhjq
+11s         Normal    SuccessfulCreate    replicaset/web-84d8fb5b57            Created pod: web-84d8fb5b57-88f2n
 11s         Normal    ScalingReplicaSet   deployment/web                       Scaled up replica set web-84d8fb5b57 from 0 to 2

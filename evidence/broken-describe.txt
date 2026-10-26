@@ -1,4 +1,4 @@
-Name:             ai-inference-7d84bb9f5c-x6s9k
+Name:             ai-inference-7d84bb9f5c-h66hb
 Namespace:        troubleshoot
 Priority:         0
 Service Account:  default
@@ -27,12 +27,12 @@ Containers:
       memory:     64Mi
     Environment:  <none>
     Mounts:
-      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-jzcwm (ro)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-2rs6v (ro)
 Conditions:
   Type           Status
   PodScheduled   False 
 Volumes:
-  kube-api-access-jzcwm:
+  kube-api-access-2rs6v:
     Type:                    Projected (a volume that contains injected data from multiple sources)
     TokenExpirationSeconds:  3607
     ConfigMapName:           kube-root-ca.crt
@@ -48,7 +48,7 @@ Events:
   Warning  FailedScheduling  10s   default-scheduler  0/5 nodes are available: 1 node(s) had untolerated taint {nvidia.com/gpu: true}, 4 node(s) didn't match Pod's node affinity/selector. preemption: 0/5 nodes are available: 5 Preemption is not helpful for scheduling.
 
 
-Name:             web-84d8fb5b57-5w9cl
+Name:             web-84d8fb5b57-88f2n
 Namespace:        troubleshoot
 Priority:         0
 Service Account:  default
@@ -76,7 +76,7 @@ Containers:
     Environment:  <none>
     Mounts:
       /usr/share/nginx/html from html (rw)
-      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-ktpq8 (ro)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-bmm6f (ro)
 Conditions:
   Type           Status
   PodScheduled   False 
@@ -85,7 +85,7 @@ Volumes:
     Type:      ConfigMap (a volume populated by a ConfigMap)
     Name:      web-conf
     Optional:  false
-  kube-api-access-ktpq8:
+  kube-api-access-bmm6f:
     Type:                    Projected (a volume that contains injected data from multiple sources)
     TokenExpirationSeconds:  3607
     ConfigMapName:           kube-root-ca.crt
@@ -101,7 +101,7 @@ Events:
   Warning  FailedScheduling  10s   default-scheduler  0/5 nodes are available: 1 node(s) had untolerated taint {nvidia.com/gpu: true}, 4 Insufficient memory. preemption: 0/5 nodes are available: 1 Preemption is not helpful for scheduling, 4 No preemption victims found for incoming pod.
 
 
-Name:             web-84d8fb5b57-xnmq7
+Name:             web-84d8fb5b57-sbhjq
 Namespace:        troubleshoot
 Priority:         0
 Service Account:  default
@@ -129,7 +129,7 @@ Containers:
     Environment:  <none>
     Mounts:
       /usr/share/nginx/html from html (rw)
-      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-mdsbb (ro)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-mg9hk (ro)
 Conditions:
   Type           Status
   PodScheduled   False 
@@ -138,7 +138,7 @@ Volumes:
     Type:      ConfigMap (a volume populated by a ConfigMap)
     Name:      web-conf
     Optional:  false
-  kube-api-access-mdsbb:
+  kube-api-access-mg9hk:
     Type:                    Projected (a volume that contains injected data from multiple sources)
     TokenExpirationSeconds:  3607
     ConfigMapName:           kube-root-ca.crt

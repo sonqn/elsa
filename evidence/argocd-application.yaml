@@ -3,13 +3,13 @@ kind: Application
 metadata:
   annotations:
     kubectl.kubernetes.io/last-applied-configuration: |
-      {"apiVersion":"argoproj.io/v1alpha1","kind":"Application","metadata":{"annotations":{},"name":"quote-api","namespace":"argocd"},"spec":{"destination":{"namespace":"quote-api","server":"https://kubernetes.default.svc"},"project":"default","source":{"helm":{"parameters":[{"name":"image.repository","value":"ghcr.io/sonqn/elsa"},{"name":"image.tag","value":"6a1e4384ded2d5d34713f9344dcc620447740ce9"}]},"path":"charts/quote-api","repoURL":"https://github.com/sonqn/elsa.git","targetRevision":"6a1e4384ded2d5d34713f9344dcc620447740ce9"},"syncPolicy":{"automated":{"prune":true,"selfHeal":true},"syncOptions":["CreateNamespace=true"]}}}
-  creationTimestamp: "2026-10-26T16:55:18Z"
-  generation: 18
+      {"apiVersion":"argoproj.io/v1alpha1","kind":"Application","metadata":{"annotations":{},"name":"quote-api","namespace":"argocd"},"spec":{"destination":{"namespace":"quote-api","server":"https://kubernetes.default.svc"},"project":"default","source":{"helm":{"parameters":[{"name":"image.repository","value":"ghcr.io/sonqn/elsa"},{"name":"image.tag","value":"c923e86e7b4047fa4b15f6240467391da3dfd7ea"}]},"path":"charts/quote-api","repoURL":"https://github.com/sonqn/elsa.git","targetRevision":"c923e86e7b4047fa4b15f6240467391da3dfd7ea"},"syncPolicy":{"automated":{"prune":true,"selfHeal":true},"syncOptions":["CreateNamespace=true"]}}}
+  creationTimestamp: "2026-10-26T17:06:02Z"
+  generation: 16
   name: quote-api
   namespace: argocd
-  resourceVersion: "2186"
-  uid: 63086234-75e1-4e5c-8df4-90f7aaa2cb33
+  resourceVersion: "1266"
+  uid: d023c666-5ed1-48c6-b8e0-ec7c03a90f6f
 spec:
   destination:
     namespace: quote-api
@@ -21,10 +21,10 @@ spec:
       - name: image.repository
         value: ghcr.io/sonqn/elsa
       - name: image.tag
-        value: 6a1e4384ded2d5d34713f9344dcc620447740ce9
+        value: c923e86e7b4047fa4b15f6240467391da3dfd7ea
     path: charts/quote-api
     repoURL: https://github.com/sonqn/elsa.git
-    targetRevision: ee66f0c64aedaa470a4c98b1d7c5df58a05bb6f1
+    targetRevision: c923e86e7b4047fa4b15f6240467391da3dfd7ea
   syncPolicy:
     automated:
       prune: true
@@ -34,27 +34,27 @@ spec:
 status:
   controllerNamespace: argocd
   health:
-    lastTransitionTime: "2026-10-26T16:56:03Z"
+    lastTransitionTime: "2026-10-26T17:06:21Z"
     status: Healthy
   history:
-  - deployStartedAt: "2026-10-26T16:55:46Z"
-    deployedAt: "2026-10-26T16:55:47Z"
+  - deployStartedAt: "2026-10-26T17:06:04Z"
+    deployedAt: "2026-10-26T17:06:04Z"
     id: 0
     initiatedBy:
       automated: true
-    revision: ee66f0c64aedaa470a4c98b1d7c5df58a05bb6f1
+    revision: c923e86e7b4047fa4b15f6240467391da3dfd7ea
     source:
       helm:
         parameters:
         - name: image.repository
           value: ghcr.io/sonqn/elsa
         - name: image.tag
-          value: 6a1e4384ded2d5d34713f9344dcc620447740ce9
+          value: c923e86e7b4047fa4b15f6240467391da3dfd7ea
       path: charts/quote-api
       repoURL: https://github.com/sonqn/elsa.git
-      targetRevision: ee66f0c64aedaa470a4c98b1d7c5df58a05bb6f1
+      targetRevision: c923e86e7b4047fa4b15f6240467391da3dfd7ea
   operationState:
-    finishedAt: "2026-10-26T16:55:47Z"
+    finishedAt: "2026-10-26T17:06:05Z"
     message: successfully synced (all tasks run)
     operation:
       initiatedBy:
@@ -62,47 +62,31 @@ status:
       retry:
         limit: 5
       sync:
+        autoHealAttemptsCount: 1
         prune: true
-        revision: ee66f0c64aedaa470a4c98b1d7c5df58a05bb6f1
+        resources:
+        - group: apps
+          kind: Deployment
+          name: quote-api
+        - group: autoscaling
+          kind: HorizontalPodAutoscaler
+          name: quote-api
+        - group: networking.k8s.io
+          kind: Ingress
+          name: quote-api
+        revision: c923e86e7b4047fa4b15f6240467391da3dfd7ea
         syncOptions:
         - CreateNamespace=true
     phase: Succeeded
-    startedAt: "2026-10-26T16:55:46Z"
+    startedAt: "2026-10-26T17:06:05Z"
     syncResult:
       resources:
-      - group: ""
-        hookPhase: Running
-        kind: Namespace
-        message: namespace/quote-api created
-        name: quote-api
-        namespace: ""
-        status: Synced
-        syncPhase: PreSync
-        version: v1
-      - group: policy
-        hookPhase: Running
-        kind: PodDisruptionBudget
-        message: poddisruptionbudget.policy/quote-api created
-        name: quote-api
-        namespace: quote-api
-        status: Synced
-        syncPhase: Sync
-        version: v1
-      - group: ""
-        hookPhase: Running
-        kind: Service
-        message: service/quote-api created
-        name: quote-api
-        namespace: quote-api
-        status: Synced
-        syncPhase: Sync
-        version: v1
       - group: apps
         hookPhase: Running
         images:
-        - ghcr.io/sonqn/elsa:6a1e4384ded2d5d34713f9344dcc620447740ce9
+        - ghcr.io/sonqn/elsa:c923e86e7b4047fa4b15f6240467391da3dfd7ea
         kind: Deployment
-        message: deployment.apps/quote-api created
+        message: deployment.apps/quote-api unchanged
         name: quote-api
         namespace: quote-api
         status: Synced
@@ -111,7 +95,7 @@ status:
       - group: autoscaling
         hookPhase: Running
         kind: HorizontalPodAutoscaler
-        message: horizontalpodautoscaler.autoscaling/quote-api created
+        message: horizontalpodautoscaler.autoscaling/quote-api unchanged
         name: quote-api
         namespace: quote-api
         status: Synced
@@ -120,24 +104,24 @@ status:
       - group: networking.k8s.io
         hookPhase: Running
         kind: Ingress
-        message: ingress.networking.k8s.io/quote-api created
+        message: ingress.networking.k8s.io/quote-api unchanged
         name: quote-api
         namespace: quote-api
         status: Synced
         syncPhase: Sync
         version: v1
-      revision: ee66f0c64aedaa470a4c98b1d7c5df58a05bb6f1
+      revision: c923e86e7b4047fa4b15f6240467391da3dfd7ea
       source:
         helm:
           parameters:
           - name: image.repository
             value: ghcr.io/sonqn/elsa
           - name: image.tag
-            value: 6a1e4384ded2d5d34713f9344dcc620447740ce9
+            value: c923e86e7b4047fa4b15f6240467391da3dfd7ea
         path: charts/quote-api
         repoURL: https://github.com/sonqn/elsa.git
-        targetRevision: ee66f0c64aedaa470a4c98b1d7c5df58a05bb6f1
-  reconciledAt: "2026-10-26T16:59:38Z"
+        targetRevision: c923e86e7b4047fa4b15f6240467391da3dfd7ea
+  reconciledAt: "2026-10-26T17:06:05Z"
   resourceHealthSource: appTree
   resources:
   - kind: Service
@@ -175,7 +159,7 @@ status:
     externalURLs:
     - http://172.18.0.5/
     images:
-    - ghcr.io/sonqn/elsa:6a1e4384ded2d5d34713f9344dcc620447740ce9
+    - ghcr.io/sonqn/elsa:c923e86e7b4047fa4b15f6240467391da3dfd7ea
   sync:
     comparedTo:
       destination:
@@ -187,9 +171,9 @@ status:
           - name: image.repository
             value: ghcr.io/sonqn/elsa
           - name: image.tag
-            value: 6a1e4384ded2d5d34713f9344dcc620447740ce9
+            value: c923e86e7b4047fa4b15f6240467391da3dfd7ea
         path: charts/quote-api
         repoURL: https://github.com/sonqn/elsa.git
-        targetRevision: ee66f0c64aedaa470a4c98b1d7c5df58a05bb6f1
-    revision: ee66f0c64aedaa470a4c98b1d7c5df58a05bb6f1
+        targetRevision: c923e86e7b4047fa4b15f6240467391da3dfd7ea
+    revision: c923e86e7b4047fa4b15f6240467391da3dfd7ea
     status: Synced

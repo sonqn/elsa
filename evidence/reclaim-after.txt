@@ -1,4 +1,4 @@
-NAME                         READY   STATUS    RESTARTS   AGE     IP           NODE               NOMINATED NODE   READINESS GATES
-quote-api-5d6c98f666-5mjlg   1/1     Running   0          47s     10.42.0.12   k3d-elsa-agent-0   <none>           <none>
-quote-api-5d6c98f666-qm4nm   1/1     Running   0          2m36s   10.42.2.5    k3d-elsa-agent-2   <none>           <none>
-quote-api-5d6c98f666-wnqvk   1/1     Running   0          41s     10.42.0.14   k3d-elsa-agent-0   <none>           <none>
+NAME                         READY   STATUS    RESTARTS   AGE   IP          NODE               NOMINATED NODE   READINESS GATES
+quote-api-54699474dd-gqr4d   1/1     Running   0          62s   10.42.1.5   k3d-elsa-agent-1   <none>           <none>
+quote-api-54699474dd-lbcph   1/1     Running   0          47s   10.42.2.7   k3d-elsa-agent-2   <none>           <none>
+quote-api-54699474dd-tmhz8   1/1     Running   0          43s   10.42.1.7   k3d-elsa-agent-1   <none>           <none>

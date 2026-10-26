@@ -1,0 +1,265 @@
+ Image clean-review-toolbox Building 
+ Image clean-review-bootstrap Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.14kB done
+#1 DONE 0.0s
+
+#2 [toolbox internal] load build definition from Dockerfile
+#2 transferring dockerfile: 732B done
+#2 DONE 0.0s
+
+#3 [bootstrap internal] load metadata for docker.io/grafana/k6:1.3.0
+#3 DONE 0.7s
+
+#4 [toolbox internal] load metadata for docker.io/alpine/helm:3.19.0
+#4 DONE 0.7s
+
+#5 [toolbox internal] load metadata for docker.io/hashicorp/terraform:1.13.4
+#5 DONE 0.7s
+
+#6 [bootstrap internal] load metadata for docker.io/library/docker:28.5.1-cli
+#6 DONE 0.7s
+
+#7 [bootstrap internal] load .dockerignore
+#7 transferring context: 2B done
+#7 DONE 0.0s
+
+#8 [bootstrap terraform 1/1] FROM docker.io/hashicorp/terraform:1.13.4@sha256:eebc943e69008b6d6d986800087164274d8c92d83db8d53fb9baa4ccff309884
+#8 resolve docker.io/hashicorp/terraform:1.13.4@sha256:eebc943e69008b6d6d986800087164274d8c92d83db8d53fb9baa4ccff309884
+#8 resolve docker.io/hashicorp/terraform:1.13.4@sha256:eebc943e69008b6d6d986800087164274d8c92d83db8d53fb9baa4ccff309884 0.1s done
+#8 DONE 0.1s
+
+#9 [bootstrap stage-3 1/7] FROM docker.io/library/docker:28.5.1-cli@sha256:9190b0613792e658a7783cf14b2d5ace5941bb68ede7276922ea36ee457d76ad
+#9 resolve docker.io/library/docker:28.5.1-cli@sha256:9190b0613792e658a7783cf14b2d5ace5941bb68ede7276922ea36ee457d76ad 0.1s done
+#9 DONE 0.1s
+
+#10 [bootstrap helm 1/1] FROM docker.io/alpine/helm:3.19.0@sha256:aef9b56f64e866207d9591d0abd8f6d767b36aadd12edf68f8a719716d9d29c9
+#10 resolve docker.io/alpine/helm:3.19.0@sha256:aef9b56f64e866207d9591d0abd8f6d767b36aadd12edf68f8a719716d9d29c9 0.1s done
+#10 DONE 0.1s
+
+#11 [bootstrap k6 1/1] FROM docker.io/grafana/k6:1.3.0@sha256:3ddc8b1a33a2c3d8edc6e99b6a762ae36cba08788463458f5e6a7703e14eb77d
+#11 resolve docker.io/grafana/k6:1.3.0@sha256:3ddc8b1a33a2c3d8edc6e99b6a762ae36cba08788463458f5e6a7703e14eb77d 0.1s done
+#11 resolve docker.io/grafana/k6:1.3.0@sha256:3ddc8b1a33a2c3d8edc6e99b6a762ae36cba08788463458f5e6a7703e14eb77d 0.1s done
+#11 DONE 0.1s
+
+#12 [bootstrap stage-3 6/7] RUN curl -fsSL https://dl.k8s.io/release/v1.33.5/bin/linux/arm64/kubectl -o /usr/local/bin/kubectl && chmod +x /usr/local/bin/kubectl  && curl -fsSL https://github.com/k3d-io/k3d/releases/download/v5.8.3/k3d-linux-arm64 -o /usr/local/bin/k3d && chmod +x /usr/local/bin/k3d
+#12 CACHED
+
+#13 [bootstrap stage-3 2/7] RUN apk add --no-cache bash curl git jq python3 openssl
+#13 CACHED
+
+#14 [bootstrap stage-3 3/7] COPY --from=terraform /bin/terraform /usr/local/bin/terraform
+#14 CACHED
+
+#15 [bootstrap stage-3 4/7] COPY --from=k6 /usr/bin/k6 /usr/local/bin/k6
+#15 CACHED
+
+#16 [bootstrap stage-3 5/7] COPY --from=helm /usr/bin/helm /usr/local/bin/helm
+#16 CACHED
+
+#17 [bootstrap stage-3 7/7] WORKDIR /workspace
+#17 CACHED
+
+#18 [bootstrap] exporting to image
+#18 exporting layers done
+#18 exporting manifest sha256:9f4d5b560ecb6e90d3f318c398328a71f87a49aa11379a0ed704a509d6db5b6b done
+#18 exporting config sha256:3cb3ccac01420bcead8d8b3b036273f914390587846152a03d7d2f438dcaac23 done
+#18 exporting attestation manifest sha256:fcba7d1e29f0adfb066c50d59389aae3d72f10432d830fd536059eeec4dff69e 0.1s done
+#18 exporting manifest list sha256:d60a9537d22c1d3c8723482010e0cbe99d2398f364fffb7b0805e786ef6dae46
+#18 exporting manifest list sha256:d60a9537d22c1d3c8723482010e0cbe99d2398f364fffb7b0805e786ef6dae46 0.0s done
+#18 naming to docker.io/library/clean-review-bootstrap:latest done
+#18 unpacking to docker.io/library/clean-review-bootstrap:latest done
+#18 DONE 0.3s
+
+#19 [toolbox] exporting to image
+#19 exporting layers done
+#19 exporting manifest sha256:9ba63bf62774471c8f11ec6c416696a3705350a79464614ef6b7e6d469f7d5ae done
+#19 exporting config sha256:41ba1a56ad24a5cec7cba848860376f5771fa2f6f97be1a8648a6bbcf97721a2 done
+#19 exporting attestation manifest sha256:fad0f7fb04c3952e879364cd7626e14b194f73fde6d17f2c16e5f07a63452484 0.1s done
+#19 exporting manifest list sha256:2b64062c802a28aee4ec04a7e289f208dc06da8fadec73a90c1e3ccd748f9ebf 0.0s done
+#19 naming to docker.io/library/clean-review-toolbox:latest done
+#19 unpacking to docker.io/library/clean-review-toolbox:latest done
+#19 DONE 0.3s
+
+#20 [toolbox] resolving provenance for metadata file
+#20 DONE 0.0s
+
+#21 [bootstrap] resolving provenance for metadata file
+#21 DONE 0.0s
+ Image clean-review-toolbox Built 
+ Image clean-review-bootstrap Built 
+ Container clean-review-toolbox-1 Recreate 
+ Container clean-review-toolbox-1 Recreated 
+ Container clean-review-bootstrap-1 Recreate 
+ Container clean-review-bootstrap-1 Recreated 
+ Container clean-review-toolbox-1 Starting 
+ Container clean-review-toolbox-1 Started 
+ Container clean-review-bootstrap-1 Starting 
+ Container clean-review-bootstrap-1 Started 
+bootstrap-1  | Cluster "k3d-elsa" set.
+bootstrap-1  | node/k3d-elsa-agent-0 condition met
+bootstrap-1  | node/k3d-elsa-agent-1 condition met
+bootstrap-1  | node/k3d-elsa-agent-2 condition met
+bootstrap-1  | node/k3d-elsa-agent-3 condition met
+bootstrap-1  | node/k3d-elsa-server-0 condition met
+bootstrap-1  | Labeling k3d-elsa-agent-0 as SPOT
+bootstrap-1  | node/k3d-elsa-agent-0 not labeled
+bootstrap-1  | Labeling k3d-elsa-agent-1 as SPOT
+bootstrap-1  | node/k3d-elsa-agent-1 not labeled
+bootstrap-1  | Labeling k3d-elsa-agent-2 as ON-DEMAND
+bootstrap-1  | node/k3d-elsa-agent-2 not labeled
+bootstrap-1  | Labeling + tainting k3d-elsa-agent-3 as GPU
+bootstrap-1  | node/k3d-elsa-agent-3 not labeled
+bootstrap-1  | node/k3d-elsa-agent-3 modified
+bootstrap-1  | 
+bootstrap-1  | Node preparation done:
+bootstrap-1  | NAME                STATUS   ROLES                  AGE   VERSION        CAPACITY    NODE-TYPE
+bootstrap-1  | k3d-elsa-agent-0    Ready    <none>                 12s   v1.33.5+k3s1   spot        
+bootstrap-1  | k3d-elsa-agent-1    Ready    <none>                 12s   v1.33.5+k3s1   spot        
+bootstrap-1  | k3d-elsa-agent-2    Ready    <none>                 12s   v1.33.5+k3s1   on-demand   
+bootstrap-1  | k3d-elsa-agent-3    Ready    <none>                 12s   v1.33.5+k3s1               gpu
+bootstrap-1  | k3d-elsa-server-0   Ready    control-plane,master   16s   v1.33.5+k3s1               
+Error response from daemon: failed to resolve reference "ghcr.io/sonqn/elsa:c923e86e7b4047fa4b15f6240467391da3dfd7ea": ghcr.io/sonqn/elsa:c923e86e7b4047fa4b15f6240467391da3dfd7ea: not found
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 375B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.13-alpine
+#2 DONE 1.8s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 71B done
+#3 DONE 0.0s
+
+#4 [build 1/4] FROM docker.io/library/python:3.13-alpine@sha256:bf12ecc0bea3f171d55145dd02c78b5eeb09f30ee2ac9cc2b4c9e4e8f5e30741
+#4 resolve docker.io/library/python:3.13-alpine@sha256:bf12ecc0bea3f171d55145dd02c78b5eeb09f30ee2ac9cc2b4c9e4e8f5e30741 done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 1.67kB done
+#5 DONE 0.0s
+
+#6 [stage-1 2/4] RUN addgroup -g 10001 app && adduser -D -u 10001 -G app app
+#6 CACHED
+
+#7 [build 2/4] WORKDIR /build
+#7 CACHED
+
+#8 [stage-1 3/4] WORKDIR /app
+#8 CACHED
+
+#9 [build 4/4] RUN python -m py_compile main.py
+#9 CACHED
+
+#10 [build 3/4] COPY app/main.py .
+#10 CACHED
+
+#11 [stage-1 4/4] COPY --from=build /build/main.py .
+#11 CACHED
+
+#12 exporting to image
+#12 exporting layers done
+#12 exporting manifest sha256:20bb68a7a0cf47d08db4c0413e746c22dc502b246c16e7ed221b5d486cdef1e2 done
+#12 exporting config sha256:2ef6cb7e2ca80877f0e7f7019034bd5f25a207fbe2f8c81b7f3d76a69635ff17 done
+#12 exporting attestation manifest sha256:98179adc0ab9ea3913397b4f7cfc3f21348a263872ba21f26e32051518d38611 0.0s done
+#12 exporting manifest list sha256:64951e69cb47ed4ed512430a813317771cd792cd90cb51b5a43dd847443413df done
+#12 naming to ghcr.io/sonqn/elsa:c923e86e7b4047fa4b15f6240467391da3dfd7ea done
+#12 unpacking to ghcr.io/sonqn/elsa:c923e86e7b4047fa4b15f6240467391da3dfd7ea done
+#12 DONE 0.1s
+INFO[0000] Importing image(s) into cluster 'elsa'       
+INFO[0000] Saving 1 image(s) from runtime...            
+INFO[0001] Importing images into nodes...               
+INFO[0001] Importing images from tarball '/k3d/images/k3d-elsa-images-20261026170503.tar' into node 'k3d-elsa-server-0'... 
+INFO[0001] Importing images from tarball '/k3d/images/k3d-elsa-images-20261026170503.tar' into node 'k3d-elsa-agent-2'... 
+INFO[0001] Importing images from tarball '/k3d/images/k3d-elsa-images-20261026170503.tar' into node 'k3d-elsa-agent-1'... 
+INFO[0001] Importing images from tarball '/k3d/images/k3d-elsa-images-20261026170503.tar' into node 'k3d-elsa-agent-0'... 
+INFO[0001] Importing images from tarball '/k3d/images/k3d-elsa-images-20261026170503.tar' into node 'k3d-elsa-agent-3'... 
+INFO[0003] Removing the tarball(s) from image volume... 
+INFO[0004] Removing k3d-tools node...                   
+INFO[0005] Successfully imported image(s)               
+INFO[0005] Successfully imported 1 image(s) into 1 cluster(s) 
+"argo" has been added to your repositories
+Release "argocd" does not exist. Installing it now.
+NAME: argocd
+LAST DEPLOYED: Mon Oct 26 17:05:10 2026
+NAMESPACE: argocd
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+In order to access the server UI you have the following options:
+
+1. kubectl port-forward service/argocd-server -n argocd 8080:443
+
+    and then open the browser on http://localhost:8080 and accept the certificate
+
+2. enable ingress in the values file `server.ingress.enabled` and either
+      - Add the annotation for ssl passthrough: https://argo-cd.readthedocs.io/en/stable/operator-manual/ingress/#option-1-ssl-passthrough
+      - Set the `configs.params."server.insecure"` in the values file and terminate SSL at your ingress: https://argo-cd.readthedocs.io/en/stable/operator-manual/ingress/#option-2-multiple-ingress-objects-and-hosts
+
+
+After reaching the UI the first time you can login with username: admin and the random password generated during the installation. You can find the password by running:
+
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+
+(You should delete the initial secret afterwards as suggested by the Getting Started Guide: https://argo-cd.readthedocs.io/en/stable/getting_started/#4-login-using-the-cli)
+application.argoproj.io/quote-api created
+NAME                         READY   STATUS    RESTARTS   AGE   IP          NODE               NOMINATED NODE   READINESS GATES
+quote-api-54699474dd-d6bt7   1/1     Running   0          3s    10.42.0.5   k3d-elsa-agent-0   <none>           <none>
+quote-api-54699474dd-gqr4d   1/1     Running   0          18s   10.42.1.5   k3d-elsa-agent-1   <none>           <none>
+quote-api-54699474dd-lbcph   1/1     Running   0          3s    10.42.2.7   k3d-elsa-agent-2   <none>           <none>
+{"quote": "Small steps build great things."}NAME                         READY   STATUS    RESTARTS   AGE   IP          NODE               NOMINATED NODE   READINESS GATES
+quote-api-54699474dd-d6bt7   1/1     Running   0          4s    10.42.0.5   k3d-elsa-agent-0   <none>           <none>
+quote-api-54699474dd-gqr4d   1/1     Running   0          19s   10.42.1.5   k3d-elsa-agent-1   <none>           <none>
+quote-api-54699474dd-lbcph   1/1     Running   0          4s    10.42.2.7   k3d-elsa-agent-2   <none>           <none>
+node/k3d-elsa-agent-0 cordoned
+Warning: ignoring DaemonSet-managed Pods: kube-system/svclb-traefik-2ccde61e-g4dhg
+evicting pod quote-api/quote-api-54699474dd-d6bt7
+evicting pod argocd/argocd-repo-server-64cf4fddc8-4lszw
+evicting pod kube-system/local-path-provisioner-774c6665dc-xqpdb
+pod/argocd-repo-server-64cf4fddc8-4lszw evicted
+pod/local-path-provisioner-774c6665dc-xqpdb evicted
+pod/quote-api-54699474dd-d6bt7 evicted
+node/k3d-elsa-agent-0 drained
+deployment "quote-api" successfully rolled out
+NAME                         READY   STATUS    RESTARTS   AGE   IP          NODE               NOMINATED NODE   READINESS GATES
+quote-api-54699474dd-gqr4d   1/1     Running   0          62s   10.42.1.5   k3d-elsa-agent-1   <none>           <none>
+quote-api-54699474dd-lbcph   1/1     Running   0          47s   10.42.2.7   k3d-elsa-agent-2   <none>           <none>
+quote-api-54699474dd-tmhz8   1/1     Running   0          43s   10.42.1.7   k3d-elsa-agent-1   <none>           <none>
+true
+node/k3d-elsa-agent-0 uncordoned
+namespace/troubleshoot created
+configmap/web-config created
+networkpolicy.networking.k8s.io/default-deny created
+deployment.apps/web created
+service/web-svc created
+deployment.apps/ai-inference created
+namespace/troubleshoot unchanged
+configmap/web-config unchanged
+networkpolicy.networking.k8s.io/default-deny unchanged
+deployment.apps/web configured
+service/web-svc configured
+deployment.apps/ai-inference configured
+networkpolicy.networking.k8s.io/smoke-to-web created
+networkpolicy.networking.k8s.io/web-from-smoke created
+Waiting for deployment "web" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "web" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "web" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "web" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "web" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "web" rollout to finish: 1 old replicas are pending termination...
+deployment "web" successfully rolled out
+deployment "ai-inference" successfully rolled out
+[1/7] default-deny NetworkPolicy must still exist (deleting it is not a fix)...
+[2/7] Node labels and taints must be untouched (fixing the nodes is not a fix)...
+[3/7] Deployment 'web' must be fully rolled out...
+deployment "web" successfully rolled out
+[4/7] Deployment 'ai-inference' must be fully rolled out...
+deployment "ai-inference" successfully rolled out
+[5/7] ai-inference pod must be running ON the GPU node...
+[6/7] Service must have ready endpoints...
+[7/7] In-cluster smoke test through the Service...
+
+PASS
