@@ -10,9 +10,9 @@ In my follow-up review, I reported reproducing Git's `dubious ownership` failure
 
 ## Representative prompts actually used
 
-1. “Why the terminal show some errors … ctr: content digest … not found” — supplied my complete run output, exposing the published-image import path missed by the earlier local-build test.
-2. “Lỗi git trên máy Linux … dubious ownership … 20-deploy.sh không chạy riêng được … dừng ghi vào evidence/” — requested concrete portability, script-independence and clean-working-tree fixes.
-3. “Hãy kiểm tra lại label đó bằng kubectl … Python làm PID 1 không có handler SIGTERM … Hãy tự đo bằng kubectl delete pod trước khi sửa.” — required observed scheduler labels and before/after timing rather than assumptions.
+1. “Please help me implement the attached challenge” (English translation of my original Vietnamese request) — established the implementation scope and the need to read both the assignment and supplied package.
+2. “Why the terminal show some errors … ctr: content digest … not found” — supplied my complete run output, exposing the published-image import path missed by the earlier local-build test.
+3. “Lỗi git trên máy Linux … dubious ownership … 20-deploy.sh không chạy riêng được … Hãy tự đo bằng kubectl delete pod trước khi sửa.” — excerpts from my review message requesting portability, independent deployment, clean working trees, Traefik-aware selection, and measured SIGTERM validation.
 
 ## Where the AI was wrong or suboptimal
 

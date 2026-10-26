@@ -18,7 +18,7 @@
 | Local-build fallback | Forced only `docker pull` to fail using a test-local command wrapper. Actual build, single-platform export, import and `crictl inspecti` checks on all five nodes succeeded. Wrapper not shipped in the repository. |
 | Troubleshooting | Original broken manifests applied, original scheduler diagnostics captured, fixed manifests applied, unchanged verifier PASS. DNS/HTTP failure descriptions are explicitly labeled inference. |
 | CI | [Run 40420130376](https://github.com/sonqn/elsa/actions/runs/40420130376): quality and multi-platform publish succeeded for the validated code SHA. Final documentation HEAD is checked separately before delivery. |
-| Documentation | OPS answers: 540 words; Q1 and Q3 are numbered. AI disclosure separates candidate actions from delegated verification and includes three actual follow-up prompts. |
+| Documentation | OPS answers: 540 words; Q1 and Q3 are numbered. AI disclosure separates candidate actions from delegated verification and includes three representative actual prompts (initial request and two follow-ups). |
 
 Raw review evidence: [`review-20261027/`](review-20261027/). `git-status-after.txt` is intentionally empty. All recorded pod timing/HTTP observations are local; no production reliability claim is made.
 
