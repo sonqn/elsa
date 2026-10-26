@@ -3,7 +3,7 @@
 OpenAI Codex assisted with reading the assignment, implementation of the HTTP service, Compose/k3d harness, Helm placement, troubleshooting fixes, GitHub Actions and documentation. The candidate must review and be able to explain this work; this document does not claim unaided authorship.
 
 Actual user prompts in this session:
-1. “Hãy giúp tôi thực hiện challenge ở file đính kèm” (help me implement the attached challenge).
+1. “Please help me complete the challenge in the attached file.” (help me implement the attached challenge).
 2. Repository destination supplied in response to the publication question: `https://github.com/sonqn/elsa`.
 
 These are the two substantive task/destination inputs; additional design prompts are not fabricated. The assistant's concrete verification questions were: does capacity-level spread retain an on-demand replica during a spot drain, and does the unchanged troubleshooting verifier pass with default-deny preserved?
