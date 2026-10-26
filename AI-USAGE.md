@@ -25,3 +25,5 @@ The initial drill did not protect its singleton ingress from eviction, and the A
 The first CI attempt also failed before scanning because pip resolved incompatible MCP/Pydantic dependencies for Semgrep. A tested digest-pinned Semgrep container fixed that without disabling `--error`. A deliberate unsafe shell=True fixture demonstrated a blocking finding.
 
 I will use the source and recorded evidence to prepare for the live code walkthrough. This disclosure does not claim that AI-generated code or local tests prove production reliability.
+
+During independent fallback-path verification, Codex also found two implementation mistakes before acceptance: BusyBox rejected a suffixed mktemp template, and this k3d environment required invoking `crictl` directly rather than through `k3s crictl`. Both were corrected and the forced-pull-failure fallback was rerun, including image inspection on all five nodes.
