@@ -1,0 +1,9 @@
+Terraform v1.13.4
+on linux_arm64
+
+Your version of Terraform is out of date! The latest version
+is 1.17.0. You can update by downloading from https://developer.hashicorp.com/terraform/install
+k6 v1.3.0+dirty (commit/5870e99ae8-dirty, go1.25.1, linux/arm64)
+v3.19.0+g3d8990f
+Client Version: v1.33.5
+Kustomize Version: v5.6.0

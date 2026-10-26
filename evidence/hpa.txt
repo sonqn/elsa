@@ -1,0 +1,2 @@
+NAME        REFERENCE              TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+quote-api   Deployment/quote-api   cpu: 0%/60%   3         9         3          4m12s

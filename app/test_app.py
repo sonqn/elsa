@@ -30,6 +30,7 @@ class APITest(unittest.TestCase):
         with self.assertRaises(urllib.error.HTTPError) as error:
             self.get("/missing")
         self.assertEqual(error.exception.code, 404)
+        error.exception.close()
 
 if __name__ == "__main__":
     unittest.main()

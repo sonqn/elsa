@@ -1,0 +1,15 @@
+node/k3d-elsa-agent-1 cordoned
+evicting pod troubleshoot/web-7cc99658f4-66jsc
+evicting pod kube-system/coredns-64fd4b4794-zqcwt
+evicting pod quote-api/quote-api-5d6c98f666-2rj2h
+evicting pod troubleshoot/smoke-test-jnx7l
+evicting pod quote-api/quote-api-5d6c98f666-98sht
+evicting pod argocd/argocd-redis-5fcd8bd66d-djt8h
+pod/smoke-test-jnx7l evicted
+pod/web-7cc99658f4-66jsc evicted
+pod/coredns-64fd4b4794-zqcwt evicted
+pod/argocd-redis-5fcd8bd66d-djt8h evicted
+evicting pod quote-api/quote-api-5d6c98f666-98sht
+pod/quote-api-5d6c98f666-2rj2h evicted
+pod/quote-api-5d6c98f666-98sht evicted
+node/k3d-elsa-agent-1 drained

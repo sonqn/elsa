@@ -32,7 +32,7 @@ spec:
 EOF
 for i in $(seq 1 120); do
   status=$(kubectl -n argocd get application quote-api -o json)
-  if [[ $(jq -r '.status.sync.status' <<< "$status") == Synced && $(jq -r '.status.health.status' <<< "$status") == Healthy ]]; then
+  if [[ $(jq -r '.status.sync.status' <<< "$status") == Synced && $(jq -r '.status.health.status' <<< "$status") == Healthy ]] && [[ $(kubectl -n quote-api get deployment quote-api -o jsonpath='{.status.readyReplicas}') -ge 3 ]]; then
     kubectl -n quote-api get pods -o wide
     curl -fsS http://k3d-elsa-serverlb/api/quote
     exit 0

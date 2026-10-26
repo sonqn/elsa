@@ -1,0 +1,6 @@
+NAME                STATUS   ROLES                  AGE   VERSION        CAPACITY    NODE-TYPE
+k3d-elsa-agent-0    Ready    <none>                 11m   v1.33.5+k3s1   spot        
+k3d-elsa-agent-1    Ready    <none>                 11m   v1.33.5+k3s1   spot        
+k3d-elsa-agent-2    Ready    <none>                 11m   v1.33.5+k3s1   on-demand   
+k3d-elsa-agent-3    Ready    <none>                 11m   v1.33.5+k3s1               gpu
+k3d-elsa-server-0   Ready    control-plane,master   11m   v1.33.5+k3s1               
