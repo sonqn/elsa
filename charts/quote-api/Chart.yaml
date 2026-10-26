@@ -1,0 +1,4 @@
+apiVersion: v2
+name: quote-api
+version: 0.1.0
+type: application

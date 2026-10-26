@@ -1,0 +1,22 @@
+services:
+  toolbox:
+    build: ./toolbox
+    volumes:
+      - .:/workspace
+      - /var/run/docker.sock:/var/run/docker.sock
+      - kubeconfig:/root/.kube
+    networks: [lab]
+  bootstrap:
+    build: ./toolbox
+    depends_on: [toolbox]
+    command: ["bash", "/workspace/scripts/bootstrap.sh"]
+    volumes:
+      - .:/workspace
+      - /var/run/docker.sock:/var/run/docker.sock
+      - kubeconfig:/root/.kube
+    networks: [lab]
+networks:
+  lab:
+    name: elsa-devops-lab
+volumes:
+  kubeconfig:

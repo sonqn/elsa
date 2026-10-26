@@ -1,0 +1,4 @@
+image:
+  repository: quote-api
+  tag: dev
+replicas: 3

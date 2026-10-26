@@ -1,0 +1,103 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quote-api
+spec:
+  selector:
+    matchLabels: {app: quote-api}
+  template:
+    metadata:
+      labels: {app: quote-api}
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        seccompProfile: {type: RuntimeDefault}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: acme.io/capacity
+                    operator: In
+                    values: [spot, on-demand]
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              preference:
+                matchExpressions:
+                  - key: acme.io/capacity
+                    operator: In
+                    values: [spot]
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: acme.io/capacity
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels: {app: quote-api}
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels: {app: quote-api}
+      containers:
+        - name: api
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          ports: [{name: http, containerPort: 8080}]
+          securityContext:
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities: {drop: [ALL]}
+          resources:
+            requests: {cpu: 150m, memory: 32Mi}
+            limits: {cpu: '1', memory: 128Mi}
+          livenessProbe:
+            httpGet: {path: /healthz, port: http}
+            timeoutSeconds: 3
+          readinessProbe:
+            httpGet: {path: /readyz, port: http}
+            timeoutSeconds: 3
+---
+apiVersion: v1
+kind: Service
+metadata: {name: quote-api}
+spec:
+  selector: {app: quote-api}
+  ports: [{port: 80, targetPort: http}]
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata: {name: quote-api}
+spec:
+  ingressClassName: traefik
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: quote-api
+                port: {number: 80}
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata: {name: quote-api}
+spec:
+  scaleTargetRef: {apiVersion: apps/v1, kind: Deployment, name: quote-api}
+  minReplicas: 3
+  maxReplicas: 9
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target: {type: Utilization, averageUtilization: 60}
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata: {name: quote-api}
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels: {app: quote-api}
