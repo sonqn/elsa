@@ -3,6 +3,7 @@ FROM grafana/k6:1.3.0 AS k6
 FROM alpine/helm:3.19.0 AS helm
 FROM docker:28.5.1-cli
 RUN apk add --no-cache bash curl git jq python3 openssl
+RUN git config --system --add safe.directory /workspace
 COPY --from=terraform /bin/terraform /usr/local/bin/terraform
 COPY --from=k6 /usr/bin/k6 /usr/local/bin/k6
 COPY --from=helm /usr/bin/helm /usr/local/bin/helm

@@ -2,7 +2,10 @@
 
 ## 1. EKS 1.33 → 1.35
 
-I would upgrade **1.33 → 1.34 → 1.35**, validating after each minor step; EKS does not permit skipping a control-plane minor. Before starting, check EKS upgrade insights/deprecated APIs, admission webhooks, version skew, backups/restore, IP quota, multi-AZ replicas, readiness and eviction budgets. Check each add-on's supported version matrix for both sides of each hop; update prerequisites (notably VPC CNI) first where required. Upgrade the control plane, then reconcile compatible vpc-cni, CoreDNS, kube-proxy and EBS/EFS CSI versions with staged checks. Create new-version worker capacity, canary a node group, drain/replace old workers within PDBs, and test DNS, networking, volume attachment and user requests before the next hop. Prefer blue/green worker groups for rollback; control-plane downgrades are not available. Top risks: (1) removed APIs/webhook incompatibility, (2) disrupted workloads due to insufficient surge/IP capacity or PDB/probe errors, (3) CNI/DNS/CSI compatibility and stateful volume/AZ constraints. “Zero downtime” is an application SLO target validated by probes, not an unconditional platform guarantee.
+1. Upgrade **1.33 → 1.34 → 1.35**, validating each hop. Check upgrade insights, deprecated APIs, webhooks, backups, IP quota, readiness, multi-AZ replicas and PDBs.
+2. Check add-on compatibility on both sides of each hop; update prerequisites such as VPC CNI first when required. Upgrade the control plane, then compatible vpc-cni, CoreDNS, kube-proxy and EBS/EFS CSI versions with staged checks.
+3. Add new-version worker capacity, canary a node group, and drain/replace old workers within PDBs. Test DNS, networking, storage and user traffic before the next hop. Blue/green workers support rollback; control-plane downgrades are unavailable.
+4. Top risks: removed APIs/webhooks; inadequate surge/IP capacity or incorrect PDBs/probes; CNI/DNS/CSI and volume/AZ incompatibility. Zero downtime is an application SLO to verify, not an unconditional platform guarantee.
 
 ## 2. Spot reclaim alert storms
 
@@ -10,7 +13,10 @@ I would keep node-state telemetry for every pool, but page on sustained user imp
 
 ## 3. Cloudflare HTML caching and LCP 5s
 
-I would reproduce a representative anonymous mobile URL and inspect waterfall, TTFB and the LCP element; slow LCP can be an oversized image or render-blocking JS even with a cache hit. Repeat GETs at the same URL/edge and inspect `CF-Cache-Status`, `Age`, `Cache-Control`, `CDN-Cache-Control`, `Set-Cookie`, `Vary` and redirects. Separate MISS→HIT from repeated DYNAMIC/BYPASS. Verify DNS is proxied, development mode is off, and inspect matching Cache Rules/Workers and rule precedence. HTML is not cached by default; confirm an explicit eligibility rule. Check origin private/no-store, cookies, authentication and query-string cache keys; compare anonymous and logged-in requests and correlate origin logs. Only cache anonymous public HTML, explicitly bypass personalized/authenticated routes and choose appropriate TTL/purge behavior. Then warm, repeat, confirm HIT/Age and reduced origin hits; remeasure TTFB/LCP with the same mobile conditions before attributing improvement to caching.
+1. Reproduce an anonymous mobile URL. Inspect the waterfall, TTFB and LCP element: images or blocking JavaScript can cause slow LCP despite cache hits.
+2. Repeat GETs at the same URL/edge. Inspect `CF-Cache-Status`, `Age`, cache-control headers, `Set-Cookie`, `Vary` and redirects. Distinguish MISS→HIT from repeated DYNAMIC/BYPASS.
+3. Verify proxied DNS, development mode, matching Cache Rules/Workers and precedence. HTML needs explicit cache eligibility. Check origin private/no-store, cookies, authentication and query-string cache keys; correlate origin logs.
+4. Cache only public anonymous HTML; bypass authenticated/personalized routes. Set appropriate TTL/purge behavior, warm the cache, verify HIT/Age and fewer origin requests, then remeasure mobile TTFB/LCP.
 
 ## 4. EKS application secrets
 

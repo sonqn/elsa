@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 source "$(dirname "$0")/common.sh"
-SHA=$(cat evidence/image-sha)
+SHA=$(git rev-parse HEAD)
 helm repo add argo https://argoproj.github.io/argo-helm --force-update
 helm upgrade --install argocd argo/argo-cd --version 8.5.8 --namespace argocd --create-namespace \
   --set dex.enabled=false --set notifications.enabled=false --set applicationSet.enabled=false \

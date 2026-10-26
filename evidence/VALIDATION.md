@@ -1,8 +1,16 @@
-# Observed validation — 26–27 October 2026 (Asia/Ho_Chi_Minh)
+# Validation record
 
-**CORE + Part 4 + Part 7 implemented. Clean-clone Golden Rule passed.**
+## Review-fix validation
 
-Validated implementation revision: `c923e86e7b4047fa4b15f6240467391da3dfd7ea`. Subsequent final edits only refresh documentation and captured evidence.
+Code has changed after the original c923e86 validation. The original results below are historical, not acceptance evidence for the revised implementation. A fresh clean-clone run and final CI check are in progress.
+
+Confirmed so far: Linux-container ownership reproduction fails with exit 128 before the scoped `/workspace` Git fix and succeeds afterwards; actual Traefik labels include `app.kubernetes.io/name=traefik`; old-image pod deletion took 32.919 seconds. Runtime logs now use ignored `.runs/`, and deployment derives SHA directly from Git.
+
+## Historical baseline (26–27 October 2026)
+
+CORE + Part 4 + Part 7; the original clean-clone run passed.
+
+Validated implementation revision: `c923e86e7b4047fa4b15f6240467391da3dfd7ea`. This historical revision predates the portability, shutdown and drill corrections.
 Environment: Apple Silicon; Docker 29.6.1; 12 CPUs / 8 GiB Docker RAM; k3s v1.33.5+k3s1. Docker layer cache was retained; the cluster and kubeconfig volume were deleted before the clean-clone run.
 
 | Check | Observed result |

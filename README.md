@@ -43,9 +43,9 @@ The wrapper waits for bootstrap before executing each numbered script in the too
 |---|---|
 | `bootstrap.sh` | Compose runs it to create four workers, configure access and run the unchanged supplied node preparation. |
 | `run-all.sh` | Wait for bootstrap and run all selected hands-on tasks; exits on failure. |
-| `10-build.sh` | Pull public SHA image (or build while CI is pending) and import into the local cluster. |
+| `10-build.sh` | Check public SHA image; only the local-build fallback exports a single-platform archive and imports it. |
 | `20-deploy.sh` | Install pinned Argo CD chart, apply its Application, wait for sync and health. |
-| `25-reclaim-drill.sh` | Record HTTP continuity, drain a spot worker, check rescheduling/on-demand readiness, always uncordon. |
+| `25-reclaim-drill.sh` | Exclude Traefik nodes, drain a spot worker hosting app pods, record HTTP/recovery, always uncordon. |
 | `30-troubleshoot.sh` | Reapply original defects, capture diagnostics, apply fixed manifests and run unchanged verifier. |
 | `common.sh` | Shared host-to-toolbox execution wrapper, not an independent task. |
 
@@ -57,7 +57,7 @@ The wrapper waits for bootstrap before executing each numbered script in the too
 - “Always” is bounded by node health and capacity: one on-demand worker is not HA for the on-demand pool itself. An on-demand outage cannot guarantee a live replica there. Production needs multiple on-demand nodes across AZs. A PDB covers voluntary eviction, not power loss.
 - Deployment omits `spec.replicas` to avoid Argo CD fighting HPA. HPA establishes the minimum after initial creation.
 - Python stdlib keeps the API small. CPU time is measured per thread, so the quote endpoint burns ~100 ms of CPU rather than sleeping. CPython GIL limits CPU parallelism per process; add replicas for throughput. Readiness is process-level because there are no external dependencies.
-- Argo CD reads this public repository at the exact HEAD SHA. The image script first pulls the corresponding GHCR image, with a source-build fallback while CI is pending. GitHub Actions publishes multi-architecture SHA-tagged images. Public GHCR pull and a successful remote CI run have been verified; exact revisions and clean-clone results are recorded in evidence/VALIDATION.md.
+- Argo CD reads this public repository at the exact HEAD SHA. The image script checks the corresponding GHCR image; Kubernetes pulls published images directly. Only the source-build fallback uses a single-platform archive import. GitHub Actions publishes multi-architecture SHA-tagged images. Public GHCR pull and a successful remote CI run have been verified; exact revisions and clean-clone results are recorded in evidence/VALIDATION.md.
 - Parts 5/6 and tracing were omitted to focus on verified core behavior and a failing CI quality gate. Terraform/k6 remain installed as requested. No load-test performance claims are made.
 
 ## Common machine issues
@@ -86,3 +86,11 @@ flowchart LR
 ```
 
 References: [Kubernetes topology spread](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/), [Argo CD Helm integration](https://argo-cd.readthedocs.io/en/stable/user-guide/helm/).
+
+## Review corrections
+
+- Toolbox Git trusts only the fixed bind-mount path `/workspace`, handling Linux UID mismatches without trusting arbitrary repositories.
+- `20-deploy.sh` derives HEAD directly and can run after bootstrap without `10-build.sh`, provided the public image exists. No SHA handoff file is needed.
+- Runtime logs go to ignored `.runs/`; `evidence/` contains deliberately committed snapshots. Scripts do not modify tracked evidence.
+- The reclaim drill excludes all nodes hosting Traefik, whose single replica is a lab ingress SPOF. This tests app-worker recovery, **not ingress HA**; it fails clearly if no eligible spot node exists. Production needs ingress redundancy.
+- The API handles SIGTERM using a separate shutdown thread; calling shutdown in the serving thread would deadlock.

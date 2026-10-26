@@ -1,6 +1,7 @@
 import hashlib
 import json
 import random
+import signal
 import threading
 import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -39,4 +40,16 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(body)
 
 if __name__ == "__main__":
-    ThreadingHTTPServer(("0.0.0.0", 8080), Handler).serve_forever()
+    with ThreadingHTTPServer(("0.0.0.0", 8080), Handler) as server:
+        server.daemon_threads = False  # Finish active requests before closing.
+        stopping = threading.Event()
+
+        def stop_server(signum, frame):
+            if not stopping.is_set():
+                stopping.set()
+                # shutdown() must run outside the serve_forever thread.
+                threading.Thread(target=server.shutdown, daemon=True).start()
+
+        signal.signal(signal.SIGTERM, stop_server)
+        signal.signal(signal.SIGINT, stop_server)
+        server.serve_forever(poll_interval=0.1)

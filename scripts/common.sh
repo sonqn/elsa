@@ -6,4 +6,5 @@ if [[ "$ROOT" != /workspace ]]; then
   docker compose exec -T toolbox bash "/workspace/scripts/$(basename "$0")" "$@"
   exit $?
 fi
-mkdir -p evidence
+RUN_LOG_DIR="$ROOT/.runs"
+mkdir -p "$RUN_LOG_DIR"

@@ -1,17 +1,27 @@
 # AI usage disclosure
 
-OpenAI Codex assisted with reading the assignment, implementation of the HTTP service, Compose/k3d harness, Helm placement, troubleshooting fixes, GitHub Actions and documentation. The candidate must review and be able to explain this work; this document does not claim unaided authorship.
+OpenAI Codex assisted with the HTTP service, Compose/k3d harness, Helm placement, troubleshooting, CI migration and documentation. The following first-person account describes the candidate's recorded actions; execution delegated to Codex is explicitly identified.
 
-Actual user prompts in this session:
-1. “Please help me complete the challenge in the attached file.” (help me implement the attached challenge).
-2. Repository destination supplied in response to the publication question: `https://github.com/sonqn/elsa`.
+## My review and corrections
 
-These are the two substantive task/destination inputs; additional design prompts are not fabricated. The assistant's concrete verification questions were: does capacity-level spread retain an on-demand replica during a spot drain, and does the unchanged troubleshooting verifier pass with default-deny preserved?
+I cloned the public repository and ran the Golden Rule myself. My terminal output exposed missing-content-digest errors during k3d image import, even though the application later ran and the troubleshooting verifier printed PASS. I asked why those errors appeared rather than treating PASS as proof that every step was correct.
 
-Correction example: the initial AI design proposed one on-demand Deployment plus an autoscaled spot-preferred Deployment. Review against the requirement exposed a mismatch: HPA minReplicas 3 plus one fixed replica produces at least four total. Before deployment this was replaced by one Deployment with hard capacity-type spread and soft hostname spread, keeping HPA minimum 3. A hard hostname spread would have unnecessarily constrained replacement scheduling when a worker disappears.
+In my follow-up review, I reported reproducing Git's `dubious ownership` failure on Linux and identified the SHA handoff file, tracked evidence being overwritten, and the single Traefik replica as problems to address. I asked Codex to independently verify ownership, inspect actual Traefik labels, measure pod deletion before changing SIGTERM handling, and repeat clean-clone validation. I did not personally perform every command in Codex's verification; their results are attributed below and in VALIDATION.md.
 
-Another practical correction: the initial Docker build tried writing Buildx state outside the sandbox and failed. Buildx state was redirected into the authorized work directory rather than claiming a successful build. Runtime evidence and outstanding external checks are kept in `evidence/VALIDATION.md`.
+## Representative prompts actually used
 
-Validation includes API behavior/CPU-work tests, Helm rendering, actual local cluster deployment and the supplied verifier where recorded. No successful GitHub run, GHCR publication or production behavior is inferred from local linting.
+1. “Why the terminal show some errors … ctr: content digest … not found” — supplied my complete run output, exposing the published-image import path missed by the earlier local-build test.
+2. “Lỗi git trên máy Linux … dubious ownership … 20-deploy.sh không chạy riêng được … dừng ghi vào evidence/” — requested concrete portability, script-independence and clean-working-tree fixes.
+3. “Hãy kiểm tra lại label đó bằng kubectl … Python làm PID 1 không có handler SIGTERM … Hãy tự đo bằng kubectl delete pod trước khi sửa.” — required observed scheduler labels and before/after timing rather than assumptions.
 
-CI correction: the first workflow installed Semgrep 1.140.0 through pip. Reproducing that in a fresh Python 3.13 container exposed a transitive MCP/Pydantic ImportError (`eval_type_backport`). The workflow now uses the tested Semgrep container pinned by digest, preserving `--error` instead of weakening the gate.
+## Where the AI was wrong or suboptimal
+
+The initial design imported every image through k3d, including multi-platform registry indexes, while its recorded clean-clone validation exercised the local-build fallback rather than that published-image archive path. My logs showed per-node errors despite k3d's success summary. The revised script lets Kubernetes pull published images directly and restricts fallback imports to a single platform, checking each node afterwards.
+
+The initial toolbox omitted safe.directory for Linux ownership differences. Codex independently reproduced exit 128 with a repository owned by UID 12345 inside a Linux container. The fix trusts `/workspace` only, not `*`.
+
+The initial drill did not protect its singleton ingress from eviction, and the API lacked SIGTERM handling. The revised drill excludes nodes hosting Traefik and explicitly limits its claim to app-node resilience. Codex measured old pod deletion before adding a shutdown thread; the final timings and label evidence are in VALIDATION.md.
+
+The first CI attempt also failed before scanning because pip resolved incompatible MCP/Pydantic dependencies for Semgrep. A tested digest-pinned Semgrep container fixed that without disabling `--error`. A deliberate unsafe shell=True fixture demonstrated a blocking finding.
+
+I will use the source and recorded evidence to prepare for the live code walkthrough. This disclosure does not claim that AI-generated code or local tests prove production reliability.
