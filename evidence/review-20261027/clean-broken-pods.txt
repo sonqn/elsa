@@ -1,0 +1,4 @@
+NAME                            READY   STATUS    RESTARTS   AGE   IP       NODE     NOMINATED NODE   READINESS GATES
+ai-inference-7d84bb9f5c-9vhmz   0/1     Pending   0          10s   <none>   <none>   <none>           <none>
+web-84d8fb5b57-qfgb8            0/1     Pending   0          10s   <none>   <none>   <none>           <none>
+web-84d8fb5b57-tpp96            0/1     Pending   0          10s   <none>   <none>   <none>           <none>

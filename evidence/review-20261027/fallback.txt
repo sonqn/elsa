@@ -1,0 +1,61 @@
+Simulated-registry-unavailable
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 375B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.13-alpine
+#2 DONE 0.9s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 78B done
+#3 DONE 0.0s
+
+#4 [build 1/4] FROM docker.io/library/python:3.13-alpine@sha256:83057c121ebd0ccd12511f81aeb7e3b36a36f81b9d0687f7b8fcc93935497768
+#4 resolve docker.io/library/python:3.13-alpine@sha256:83057c121ebd0ccd12511f81aeb7e3b36a36f81b9d0687f7b8fcc93935497768 done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 56B done
+#5 DONE 0.0s
+
+#6 [build 4/4] RUN python -m py_compile main.py
+#6 CACHED
+
+#7 [stage-1 3/4] WORKDIR /app
+#7 CACHED
+
+#8 [build 3/4] COPY app/main.py .
+#8 CACHED
+
+#9 [stage-1 2/4] RUN addgroup -g 10001 app && adduser -D -u 10001 -G app app
+#9 CACHED
+
+#10 [build 2/4] WORKDIR /build
+#10 CACHED
+
+#11 [stage-1 4/4] COPY --from=build /build/main.py .
+#11 CACHED
+
+#12 exporting to image
+#12 exporting layers done
+#12 exporting manifest sha256:0084e278d86cfbfa75dcbde0f96df15b5268c990f19e7581415697806060ffce done
+#12 exporting config sha256:05e3c08cfc869c1ba2c40c0bd0cddf64ef855d72eb988fe1bd7a3a148c26098c done
+#12 naming to ghcr.io/sonqn/elsa:ca8c2dfa5a348d32a47622abcdac0960d423bc08 done
+#12 unpacking to ghcr.io/sonqn/elsa:ca8c2dfa5a348d32a47622abcdac0960d423bc08 done
+#12 DONE 0.0s
+INFO[0000] Importing image(s) into cluster 'elsa'       
+INFO[0000] Starting new tools node...                   
+INFO[0000] Starting node 'k3d-elsa-tools'               
+INFO[0000] Saving 1 tarball(s) to shared image volume... 
+INFO[0000] Importing images into nodes...               
+INFO[0000] Importing images from tarball '/k3d/images/k3d-elsa-images-20261026232919-file-image.tar' into node 'k3d-elsa-server-0'... 
+INFO[0000] Importing images from tarball '/k3d/images/k3d-elsa-images-20261026232919-file-image.tar' into node 'k3d-elsa-agent-3'... 
+INFO[0000] Importing images from tarball '/k3d/images/k3d-elsa-images-20261026232919-file-image.tar' into node 'k3d-elsa-agent-1'... 
+INFO[0000] Importing images from tarball '/k3d/images/k3d-elsa-images-20261026232919-file-image.tar' into node 'k3d-elsa-agent-2'... 
+INFO[0000] Importing images from tarball '/k3d/images/k3d-elsa-images-20261026232919-file-image.tar' into node 'k3d-elsa-agent-0'... 
+INFO[0001] Removing the tarball(s) from image volume... 
+INFO[0002] Removing k3d-tools node...                   
+INFO[0002] Successfully imported image(s)               
+INFO[0002] Successfully imported 1 image(s) into 1 cluster(s) 

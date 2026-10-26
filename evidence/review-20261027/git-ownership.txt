@@ -1,0 +1,12 @@
+Repository owner:
+12345:12345
+Control: clear safe.directory to reproduce old behavior
+fatal: detected dubious ownership in repository at '/workspace'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory /workspace
+control_exit=128
+With toolbox system config:
+/workspace
+51b7aad2cf0bfa0eb123353f80b235f72afab5f3
+fixed_exit=0

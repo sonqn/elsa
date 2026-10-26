@@ -1,0 +1,2 @@
+Excluded Traefik nodes: k3d-elsa-agent-2
+Selected spot node: k3d-elsa-agent-0

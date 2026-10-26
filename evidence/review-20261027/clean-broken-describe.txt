@@ -1,0 +1,154 @@
+Name:             ai-inference-7d84bb9f5c-9vhmz
+Namespace:        troubleshoot
+Priority:         0
+Service Account:  default
+Node:             <none>
+Labels:           app=ai-inference
+                  pod-template-hash=7d84bb9f5c
+Annotations:      <none>
+Status:           Pending
+IP:               
+IPs:              <none>
+Controlled By:    ReplicaSet/ai-inference-7d84bb9f5c
+Containers:
+  inference:
+    Image:      busybox:1.36
+    Port:       <none>
+    Host Port:  <none>
+    Command:
+      sh
+      -c
+      echo 'inference engine warm'; while true; do sleep 3600; done
+    Limits:
+      cpu:     500m
+      memory:  128Mi
+    Requests:
+      cpu:        100m
+      memory:     64Mi
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-j6x9q (ro)
+Conditions:
+  Type           Status
+  PodScheduled   False 
+Volumes:
+  kube-api-access-j6x9q:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              node-type=gpu
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason            Age   From               Message
+  ----     ------            ----  ----               -------
+  Warning  FailedScheduling  10s   default-scheduler  0/5 nodes are available: 1 node(s) had untolerated taint {nvidia.com/gpu: true}, 4 node(s) didn't match Pod's node affinity/selector. preemption: 0/5 nodes are available: 5 Preemption is not helpful for scheduling.
+
+
+Name:             web-84d8fb5b57-qfgb8
+Namespace:        troubleshoot
+Priority:         0
+Service Account:  default
+Node:             <none>
+Labels:           app=web
+                  pod-template-hash=84d8fb5b57
+Annotations:      <none>
+Status:           Pending
+IP:               
+IPs:              <none>
+Controlled By:    ReplicaSet/web-84d8fb5b57
+Containers:
+  nginx:
+    Image:      nginx:1.25.99
+    Port:       80/TCP
+    Host Port:  0/TCP
+    Limits:
+      cpu:     500m
+      memory:  16Gi
+    Requests:
+      cpu:        100m
+      memory:     16Gi
+    Liveness:     http-get http://:8080/ delay=5s timeout=1s period=5s #success=1 #failure=3
+    Readiness:    http-get http://:8080/ delay=3s timeout=1s period=5s #success=1 #failure=3
+    Environment:  <none>
+    Mounts:
+      /usr/share/nginx/html from html (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-tbxjl (ro)
+Conditions:
+  Type           Status
+  PodScheduled   False 
+Volumes:
+  html:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      web-conf
+    Optional:  false
+  kube-api-access-tbxjl:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason            Age   From               Message
+  ----     ------            ----  ----               -------
+  Warning  FailedScheduling  10s   default-scheduler  0/5 nodes are available: 1 node(s) had untolerated taint {nvidia.com/gpu: true}, 4 Insufficient memory. preemption: 0/5 nodes are available: 1 Preemption is not helpful for scheduling, 4 No preemption victims found for incoming pod.
+
+
+Name:             web-84d8fb5b57-tpp96
+Namespace:        troubleshoot
+Priority:         0
+Service Account:  default
+Node:             <none>
+Labels:           app=web
+                  pod-template-hash=84d8fb5b57
+Annotations:      <none>
+Status:           Pending
+IP:               
+IPs:              <none>
+Controlled By:    ReplicaSet/web-84d8fb5b57
+Containers:
+  nginx:
+    Image:      nginx:1.25.99
+    Port:       80/TCP
+    Host Port:  0/TCP
+    Limits:
+      cpu:     500m
+      memory:  16Gi
+    Requests:
+      cpu:        100m
+      memory:     16Gi
+    Liveness:     http-get http://:8080/ delay=5s timeout=1s period=5s #success=1 #failure=3
+    Readiness:    http-get http://:8080/ delay=3s timeout=1s period=5s #success=1 #failure=3
+    Environment:  <none>
+    Mounts:
+      /usr/share/nginx/html from html (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-nzvfm (ro)
+Conditions:
+  Type           Status
+  PodScheduled   False 
+Volumes:
+  html:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      web-conf
+    Optional:  false
+  kube-api-access-nzvfm:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason            Age   From               Message
+  ----     ------            ----  ----               -------
+  Warning  FailedScheduling  10s   default-scheduler  0/5 nodes are available: 1 node(s) had untolerated taint {nvidia.com/gpu: true}, 4 Insufficient memory. preemption: 0/5 nodes are available: 1 Preemption is not helpful for scheduling, 4 No preemption victims found for incoming pod.

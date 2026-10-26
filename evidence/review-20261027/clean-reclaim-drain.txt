@@ -1,0 +1,8 @@
+node/k3d-elsa-agent-0 cordoned
+evicting pod quote-api/quote-api-5f756fb78-dgqht
+evicting pod argocd/argocd-repo-server-64cf4fddc8-zxz9g
+evicting pod kube-system/metrics-server-7bfffcd44-h7sk7
+pod/argocd-repo-server-64cf4fddc8-zxz9g evicted
+pod/quote-api-5f756fb78-dgqht evicted
+pod/metrics-server-7bfffcd44-h7sk7 evicted
+node/k3d-elsa-agent-0 drained

@@ -1,0 +1,106 @@
+ Image review-final-bootstrap Building 
+ Image review-final-toolbox Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.14kB done
+#1 DONE 0.0s
+
+#2 [toolbox internal] load build definition from Dockerfile
+#2 transferring dockerfile: 788B done
+#2 DONE 0.0s
+
+#3 [bootstrap internal] load metadata for docker.io/alpine/helm:3.19.0
+#3 ...
+
+#4 [bootstrap internal] load metadata for docker.io/library/docker:28.5.1-cli
+#4 DONE 1.6s
+
+#5 [bootstrap internal] load metadata for docker.io/grafana/k6:1.3.0
+#5 DONE 1.6s
+
+#6 [toolbox internal] load metadata for docker.io/hashicorp/terraform:1.13.4
+#6 DONE 1.6s
+
+#3 [bootstrap internal] load metadata for docker.io/alpine/helm:3.19.0
+#3 DONE 3.9s
+
+#7 [bootstrap internal] load .dockerignore
+#7 transferring context: 2B done
+#7 DONE 0.0s
+
+#8 [toolbox k6 1/1] FROM docker.io/grafana/k6:1.3.0@sha256:3ddc8b1a33a2c3d8edc6e99b6a762ae36cba08788463458f5e6a7703e14eb77d
+#8 resolve docker.io/grafana/k6:1.3.0@sha256:3ddc8b1a33a2c3d8edc6e99b6a762ae36cba08788463458f5e6a7703e14eb77d 0.0s done
+#8 DONE 0.0s
+
+#9 [bootstrap terraform 1/1] FROM docker.io/hashicorp/terraform:1.13.4@sha256:eebc943e69008b6d6d986800087164274d8c92d83db8d53fb9baa4ccff309884
+#9 resolve docker.io/hashicorp/terraform:1.13.4@sha256:eebc943e69008b6d6d986800087164274d8c92d83db8d53fb9baa4ccff309884 0.0s done
+#9 DONE 0.0s
+
+#10 [toolbox helm 1/1] FROM docker.io/alpine/helm:3.19.0@sha256:aef9b56f64e866207d9591d0abd8f6d767b36aadd12edf68f8a719716d9d29c9
+#10 resolve docker.io/alpine/helm:3.19.0@sha256:aef9b56f64e866207d9591d0abd8f6d767b36aadd12edf68f8a719716d9d29c9 0.0s done
+#10 DONE 0.0s
+
+#11 [toolbox stage-3 1/8] FROM docker.io/library/docker:28.5.1-cli@sha256:9190b0613792e658a7783cf14b2d5ace5941bb68ede7276922ea36ee457d76ad
+#11 resolve docker.io/library/docker:28.5.1-cli@sha256:9190b0613792e658a7783cf14b2d5ace5941bb68ede7276922ea36ee457d76ad 0.0s done
+#11 DONE 0.0s
+
+#12 [bootstrap stage-3 7/8] RUN curl -fsSL https://dl.k8s.io/release/v1.33.5/bin/linux/arm64/kubectl -o /usr/local/bin/kubectl && chmod +x /usr/local/bin/kubectl  && curl -fsSL https://github.com/k3d-io/k3d/releases/download/v5.8.3/k3d-linux-arm64 -o /usr/local/bin/k3d && chmod +x /usr/local/bin/k3d
+#12 CACHED
+
+#13 [bootstrap stage-3 2/8] RUN apk add --no-cache bash curl git jq python3 openssl
+#13 CACHED
+
+#14 [bootstrap stage-3 4/8] COPY --from=terraform /bin/terraform /usr/local/bin/terraform
+#14 CACHED
+
+#15 [bootstrap stage-3 6/8] COPY --from=helm /usr/bin/helm /usr/local/bin/helm
+#15 CACHED
+
+#16 [bootstrap stage-3 3/8] RUN git config --system --add safe.directory /workspace
+#16 CACHED
+
+#17 [bootstrap stage-3 5/8] COPY --from=k6 /usr/bin/k6 /usr/local/bin/k6
+#17 CACHED
+
+#18 [bootstrap stage-3 8/8] WORKDIR /workspace
+#18 CACHED
+
+#19 [toolbox] exporting to image
+#19 exporting layers done
+#19 exporting manifest sha256:a4aab2b1fb0169920eed8201668117a9b303296d800bf592f410512b1b48f56f 0.0s done
+#19 exporting config sha256:c754d689ff192a68a7fd531d334f7d2705c58d50105bfa530f04bbad7e5db035 done
+#19 exporting attestation manifest sha256:93b6a6c92a4b440e3ccffcc52276f2d82d9af4cf18bbe6f459ec3f3b9335d14e 0.0s done
+#19 exporting manifest list sha256:48412d514a92414e68c03a234748afa96147f21a0f8dd96211906c24377d15b7 done
+#19 naming to docker.io/library/review-final-toolbox:latest
+#19 naming to docker.io/library/review-final-toolbox:latest done
+#19 unpacking to docker.io/library/review-final-toolbox:latest done
+#19 DONE 0.1s
+
+#20 [bootstrap] exporting to image
+#20 exporting layers done
+#20 exporting manifest sha256:f322178089a2f5db869845c325f0f3a9b6b1ebf25c1f916cb2b8b5146437c3fe 0.0s done
+#20 exporting config sha256:49f4c4778433e466c38b5f879f1fd452e389c9d9f2b74e40f9dd55cca32166d9 done
+#20 exporting attestation manifest sha256:c110abea728bf26368f7f4fadec46fc5c146ac78a4d70cf84899e00e52307e25 0.0s done
+#20 exporting manifest list sha256:4b7b2a86325d7fc626f1f3dc1854add0d4fcf6a0a293964695a0b203afcec909 done
+#20 naming to docker.io/library/review-final-bootstrap:latest done
+#20 unpacking to docker.io/library/review-final-bootstrap:latest done
+#20 DONE 0.1s
+
+#21 [bootstrap] resolving provenance for metadata file
+#21 DONE 0.0s
+
+#22 [toolbox] resolving provenance for metadata file
+#22 DONE 0.0s
+ Image review-final-bootstrap Built 
+ Image review-final-toolbox Built 
+ Network elsa-devops-lab Creating 
+ Network elsa-devops-lab Created 
+ Volume review-final_kubeconfig Creating 
+ Volume review-final_kubeconfig Created 
+ Container review-final-toolbox-1 Creating 
+ Container review-final-toolbox-1 Created 
+ Container review-final-bootstrap-1 Creating 
+ Container review-final-bootstrap-1 Created 
+ Container review-final-toolbox-1 Starting 
+ Container review-final-toolbox-1 Started 
+ Container review-final-bootstrap-1 Starting 
+ Container review-final-bootstrap-1 Started 

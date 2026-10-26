@@ -1,0 +1,31 @@
+"argo" has been added to your repositories
+Release "argocd" does not exist. Installing it now.
+NAME: argocd
+LAST DEPLOYED: Mon Oct 26 23:23:00 2026
+NAMESPACE: argocd
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+In order to access the server UI you have the following options:
+
+1. kubectl port-forward service/argocd-server -n argocd 8080:443
+
+    and then open the browser on http://localhost:8080 and accept the certificate
+
+2. enable ingress in the values file `server.ingress.enabled` and either
+      - Add the annotation for ssl passthrough: https://argo-cd.readthedocs.io/en/stable/operator-manual/ingress/#option-1-ssl-passthrough
+      - Set the `configs.params."server.insecure"` in the values file and terminate SSL at your ingress: https://argo-cd.readthedocs.io/en/stable/operator-manual/ingress/#option-2-multiple-ingress-objects-and-hosts
+
+
+After reaching the UI the first time you can login with username: admin and the random password generated during the installation. You can find the password by running:
+
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+
+(You should delete the initial secret afterwards as suggested by the Getting Started Guide: https://argo-cd.readthedocs.io/en/stable/getting_started/#4-login-using-the-cli)
+application.argoproj.io/quote-api created
+NAME                         READY   STATUS    RESTARTS   AGE   IP          NODE               NOMINATED NODE   READINESS GATES
+quote-api-6747bfc948-brqw6   1/1     Running   0          8s    10.42.3.5   k3d-elsa-agent-0   <none>           <none>
+quote-api-6747bfc948-wt574   1/1     Running   0          8s    10.42.0.5   k3d-elsa-agent-2   <none>           <none>
+quote-api-6747bfc948-zcpxv   1/1     Running   0          23s   10.42.2.9   k3d-elsa-agent-1   <none>           <none>
+{"quote": "Keep learning."}

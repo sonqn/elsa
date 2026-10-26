@@ -1,0 +1,2 @@
+NAME                       READY   STATUS    RESTARTS   AGE   IP          NODE               NOMINATED NODE   READINESS GATES   LABELS
+traefik-74d6699b86-f9vsh   1/1     Running   0          43s   10.42.3.6   k3d-elsa-agent-0   <none>           <none>            app.kubernetes.io/instance=traefik-kube-system,app.kubernetes.io/managed-by=Helm,app.kubernetes.io/name=traefik,helm.sh/chart=traefik-34.2.1_up34.2.0,pod-template-hash=74d6699b86

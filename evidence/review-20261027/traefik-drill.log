@@ -1,0 +1,26 @@
+Excluded Traefik nodes: k3d-elsa-agent-0
+k3d-elsa-agent-2
+Selected spot node: k3d-elsa-agent-1
+NAME                         READY   STATUS    RESTARTS   AGE   IP          NODE               NOMINATED NODE   READINESS GATES
+quote-api-6747bfc948-brqw6   1/1     Running   0          34s   10.42.3.5   k3d-elsa-agent-0   <none>           <none>
+quote-api-6747bfc948-wt574   1/1     Running   0          34s   10.42.0.5   k3d-elsa-agent-2   <none>           <none>
+quote-api-6747bfc948-zcpxv   1/1     Running   0          49s   10.42.2.9   k3d-elsa-agent-1   <none>           <none>
+node/k3d-elsa-agent-1 cordoned
+Warning: ignoring DaemonSet-managed Pods: kube-system/svclb-traefik-4a83a576-zhfwl
+evicting pod quote-api/quote-api-6747bfc948-zcpxv
+evicting pod argocd/argocd-server-858fcccddb-lclt7
+evicting pod argocd/argocd-applicationset-controller-5f54f9bc87-8tcnm
+evicting pod kube-system/helm-install-traefik-fgjp6
+pod/helm-install-traefik-fgjp6 evicted
+pod/argocd-applicationset-controller-5f54f9bc87-8tcnm evicted
+pod/quote-api-6747bfc948-zcpxv evicted
+pod/argocd-server-858fcccddb-lclt7 evicted
+node/k3d-elsa-agent-1 drained
+Waiting for deployment "quote-api" rollout to finish: 2 of 3 updated replicas are available...
+deployment "quote-api" successfully rolled out
+NAME                         READY   STATUS    RESTARTS   AGE   IP          NODE               NOMINATED NODE   READINESS GATES
+quote-api-6747bfc948-brqw6   1/1     Running   0          55s   10.42.3.5   k3d-elsa-agent-0   <none>           <none>
+quote-api-6747bfc948-j96xc   1/1     Running   0          21s   10.42.3.7   k3d-elsa-agent-0   <none>           <none>
+quote-api-6747bfc948-wt574   1/1     Running   0          55s   10.42.0.5   k3d-elsa-agent-2   <none>           <none>
+true
+node/k3d-elsa-agent-1 uncordoned
