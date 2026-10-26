@@ -55,7 +55,7 @@ The wrapper waits for bootstrap before executing each numbered script in the too
 - “Always” is bounded by node health and capacity: one on-demand worker is not HA for the on-demand pool itself. An on-demand outage cannot guarantee a live replica there. Production needs multiple on-demand nodes across AZs. A PDB covers voluntary eviction, not power loss.
 - Deployment omits `spec.replicas` to avoid Argo CD fighting HPA. HPA establishes the minimum after initial creation.
 - Python stdlib keeps the API small. CPU time is measured per thread, so the quote endpoint burns ~100 ms of CPU rather than sleeping. CPython GIL limits CPU parallelism per process; add replicas for throughput. Readiness is process-level because there are no external dependencies.
-- Argo CD reads this public repository at the exact HEAD SHA. The image script first pulls the corresponding GHCR image, with a source-build fallback while CI is pending. GitHub Actions publishes multi-architecture SHA-tagged images. Public GHCR access and successful remote CI must be verified before submission; local image import does not prove either.
+- Argo CD reads this public repository at the exact HEAD SHA. The image script first pulls the corresponding GHCR image, with a source-build fallback while CI is pending. GitHub Actions publishes multi-architecture SHA-tagged images. Public GHCR pull and a successful remote CI run have been verified; exact revisions and clean-clone results are recorded in evidence/VALIDATION.md.
 - Parts 5/6 and tracing were omitted to focus on verified core behavior and a failing CI quality gate. Terraform/k6 remain installed as requested. No load-test performance claims are made.
 
 ## Common machine issues
